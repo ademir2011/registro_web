@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:registro_web/src/register/presenter/pages/subpages/order_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
             width: size.width * 0.25,
             child: Column(
               children: const [
-                SideMenuCashPage(),
+                OrderPage(),
               ],
             ),
           ),
@@ -49,30 +50,28 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               children: [
                 SizedBox(
-                    height: size.height * (0.15 - appBarHeightPercentage),
-                    child: Container(
-                      color: Colors.black,
-                    )),
+                  height: size.height * (0.15 - appBarHeightPercentage),
+                  child: const SearchAndAmountPage(),
+                ),
                 SizedBox(
                   height: size.height * 0.75,
                   child: Row(
                     children: [
                       SizedBox(
                         width: size.width * 0.25,
-                        child: Container(color: Colors.red),
+                        child: const CategoryPage(),
                       ),
                       SizedBox(
                         width: size.width * 0.50,
-                        child: Container(color: Colors.green),
+                        child: const ItemPage(),
                       ),
                     ],
                   ),
                 ),
                 SizedBox(
-                    height: size.height * 0.10,
-                    child: Container(
-                      color: Colors.purple,
-                    )),
+                  height: size.height * 0.10,
+                  child: const ActionsWidget(),
+                ),
               ],
             ),
           ),
@@ -82,25 +81,50 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 }
 
-class SideMenuCashPage extends StatefulWidget {
-  const SideMenuCashPage({Key? key}) : super(key: key);
+class ActionsWidget extends StatelessWidget {
+  const ActionsWidget({
+    Key? key,
+  }) : super(key: key);
 
-  @override
-  State<SideMenuCashPage> createState() => _SideMenuCashPageState();
-}
-
-class _SideMenuCashPageState extends State<SideMenuCashPage> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final appBarHeightPercentage = ((AppBar().preferredSize.height * 100) / size.height) / 100;
-    return Column(
-      children: [
-        SizedBox(height: size.height * (0.25 - appBarHeightPercentage), child: Container(color: Colors.red)),
-        SizedBox(height: size.height * 0.10, child: Container(color: Colors.green)),
-        SizedBox(height: size.height * 0.50, child: Container(color: Colors.blue)),
-        SizedBox(height: size.height * 0.15, child: Container(color: Colors.yellow)),
-      ],
+    return Container(
+      color: Colors.purple,
+    );
+  }
+}
+
+class ItemPage extends StatelessWidget {
+  const ItemPage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(color: Colors.green);
+  }
+}
+
+class CategoryPage extends StatelessWidget {
+  const CategoryPage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(color: Colors.red);
+  }
+}
+
+class SearchAndAmountPage extends StatelessWidget {
+  const SearchAndAmountPage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.black,
     );
   }
 }
