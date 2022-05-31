@@ -39,11 +39,7 @@ class _RegisterPageState extends State<RegisterPage> {
         children: [
           SizedBox(
             width: size.width * 0.25,
-            child: Column(
-              children: const [
-                OrderPage(),
-              ],
-            ),
+            child: const OrderPage(),
           ),
           SizedBox(
             width: size.width * 0.75,
@@ -123,8 +119,95 @@ class SearchAndAmountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
-      color: Colors.black,
+      padding: const EdgeInsets.all(15),
+      child: Row(
+        children: [
+          SizedBox(
+            width: size.width * 0.23,
+            child: TextFormField(
+              decoration: const InputDecoration(hintText: 'Search Items'),
+            ),
+          ),
+          const SizedBox(width: 25),
+          OptionWidget(onPressed: () {}, symbol: '\$', symbolColor: true),
+          OptionWidget(onPressed: () {}, symbol: '#', symbolColor: true),
+          ListView.builder(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            itemCount: 9,
+            itemBuilder: (ctx, index) {
+              return Align(
+                child: OptionWidget(
+                  onPressed: () {},
+                  symbol: (index + 1).toString(),
+                  isSelected: index == 0,
+                ),
+              );
+            },
+          ),
+          const Spacer(),
+          OptionWidget(
+            onPressed: () {},
+            icon: Icons.highlight_remove_sharp,
+            withBorder: false,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class OptionWidget extends StatelessWidget {
+  final String? symbol;
+  final bool symbolColor;
+  final bool isSelected;
+  final IconData? icon;
+  final bool withBorder;
+  final void Function()? onPressed;
+
+  const OptionWidget({
+    Key? key,
+    this.symbol,
+    this.symbolColor = false,
+    this.isSelected = false,
+    this.withBorder = true,
+    this.icon,
+    required this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        width: 50,
+        height: 50,
+        margin: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: symbolColor
+              ? const Color(0xffffac02)
+              : isSelected
+                  ? Theme.of(context).colorScheme.secondary
+                  : null,
+          border: withBorder
+              ? Border.all(
+                  color: const Color(0xffc1c1c1),
+                  width: 2,
+                )
+              : null,
+        ),
+        child: Center(
+          child: icon != null
+              ? Icon(icon, size: 40)
+              : Text(
+                  symbol != null ? symbol! : '',
+                  style: const TextStyle(fontSize: 25),
+                ),
+        ),
+      ),
     );
   }
 }
