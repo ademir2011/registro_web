@@ -25,17 +25,24 @@ class ElevatedButtonWidget extends StatelessWidget {
         primary: secondaryColor ? const Color(0xfff99b24) : null,
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        padding: EdgeInsets.symmetric(horizontal: big ? 40 : 15, vertical: big ? 25 : 15),
         child: centerIcon != null
-            ? Row(
-                children: [
-                  if (prefixIcon == null) Icon(centerIcon, size: 16),
-                  if (prefixIcon != null) Icon(prefixIcon),
-                  if (prefixIcon != null) SizedBox(width: 5),
-                  if (prefixIcon != null) Text(title),
-                ],
-              )
-            : Text(title),
+            ? Icon(centerIcon, size: 29)
+            : prefixIcon != null
+                ? Row(
+                    children: [
+                      Icon(prefixIcon, size: 29),
+                      const SizedBox(width: 5),
+                      Text(
+                        title,
+                        style: TextStyle(fontSize: 25),
+                      ),
+                    ],
+                  )
+                : Text(
+                    title,
+                    style: TextStyle(fontSize: 25),
+                  ),
       ),
       onPressed: onPressed,
     );

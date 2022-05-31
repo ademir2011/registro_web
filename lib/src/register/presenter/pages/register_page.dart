@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:registro_web/src/register/presenter/pages/subpages/category_page.dart';
 import 'package:registro_web/src/register/presenter/pages/subpages/order_page.dart';
+import 'package:registro_web/src/register/presenter/pages/subpages/search_and_amount_page.dart';
+import 'package:registro_web/src/register/presenter/pages/subpages/widgets/elevated_button_widget.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -50,7 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: const SearchAndAmountPage(),
                 ),
                 SizedBox(
-                  height: size.height * 0.75,
+                  height: size.height * 0.70,
                   child: Row(
                     children: [
                       SizedBox(
@@ -65,7 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 SizedBox(
-                  height: size.height * 0.10,
+                  height: size.height * 0.15,
                   child: const ActionsWidget(),
                 ),
               ],
@@ -85,7 +88,21 @@ class ActionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.purple,
+      padding: const EdgeInsets.only(right: 10, bottom: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          ElevatedButtonWidget(title: 'PAY', big: true, prefixIcon: Icons.money, onPressed: () {}),
+          const SizedBox(width: 5),
+          ElevatedButtonWidget(title: 'Discount', big: true, onPressed: () {}),
+          const Spacer(),
+          ElevatedButtonWidget(title: 'Kitchen', big: true, onPressed: () {}),
+          const SizedBox(width: 5),
+          ElevatedButtonWidget(title: 'My Cashier', big: true, onPressed: () {}),
+          const SizedBox(width: 5),
+          ElevatedButtonWidget(title: 'Restart Order', big: true, onPressed: () {}),
+        ],
+      ),
     );
   }
 }
@@ -97,116 +114,73 @@ class ItemPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.green);
-  }
-}
-
-class CategoryPage extends StatelessWidget {
-  const CategoryPage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(color: Colors.red);
-  }
-}
-
-class SearchAndAmountPage extends StatelessWidget {
-  const SearchAndAmountPage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Container(
-      padding: const EdgeInsets.all(15),
-      child: Row(
-        children: [
-          SizedBox(
-            width: size.width * 0.23,
-            child: TextFormField(
-              decoration: const InputDecoration(hintText: 'Search Items'),
-            ),
-          ),
-          const SizedBox(width: 25),
-          OptionWidget(onPressed: () {}, symbol: '\$', symbolColor: true),
-          OptionWidget(onPressed: () {}, symbol: '#', symbolColor: true),
-          ListView.builder(
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            itemCount: 9,
-            itemBuilder: (ctx, index) {
-              return Align(
-                child: OptionWidget(
-                  onPressed: () {},
-                  symbol: (index + 1).toString(),
-                  isSelected: index == 0,
-                ),
-              );
-            },
-          ),
-          const Spacer(),
-          OptionWidget(
-            onPressed: () {},
-            icon: Icons.highlight_remove_sharp,
-            withBorder: false,
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Wrap(
+          children: [
+            ItemWidget(size: size),
+            ItemWidget(size: size),
+            ItemWidget(size: size),
+            ItemWidget(size: size),
+            ItemWidget(size: size),
+            ItemWidget(size: size),
+            ItemWidget(size: size),
+            ItemWidget(size: size),
+            ItemWidget(size: size),
+            ItemWidget(size: size),
+          ],
+        ),
       ),
     );
   }
 }
 
-class OptionWidget extends StatelessWidget {
-  final String? symbol;
-  final bool symbolColor;
-  final bool isSelected;
-  final IconData? icon;
-  final bool withBorder;
-  final void Function()? onPressed;
-
-  const OptionWidget({
+class ItemWidget extends StatelessWidget {
+  const ItemWidget({
     Key? key,
-    this.symbol,
-    this.symbolColor = false,
-    this.isSelected = false,
-    this.withBorder = true,
-    this.icon,
-    required this.onPressed,
+    required this.size,
   }) : super(key: key);
+
+  final Size size;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: Container(
-        width: 50,
-        height: 50,
-        margin: const EdgeInsets.all(5),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: symbolColor
-              ? const Color(0xffffac02)
-              : isSelected
-                  ? Theme.of(context).colorScheme.secondary
-                  : null,
-          border: withBorder
-              ? Border.all(
-                  color: const Color(0xffc1c1c1),
-                  width: 2,
-                )
-              : null,
-        ),
-        child: Center(
-          child: icon != null
-              ? Icon(icon, size: 40)
-              : Text(
-                  symbol != null ? symbol! : '',
-                  style: const TextStyle(fontSize: 25),
+    return Container(
+      width: size.width * 0.24,
+      height: 125,
+      margin: const EdgeInsets.only(right: 5, bottom: 5),
+      color: Theme.of(context).colorScheme.tertiary,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(left: 100),
+            child: Text(
+              'Bacon ,quejo e Ovo, Alface, tomate',
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              height: 25,
+              width: 50,
+              margin: const EdgeInsets.all(5),
+              color: Theme.of(context).cardColor,
+              child: const Center(
+                child: Text(
+                  '3.69',
+                  style: TextStyle(color: Colors.green),
                 ),
-        ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
