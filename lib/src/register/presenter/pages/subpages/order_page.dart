@@ -27,22 +27,36 @@ class _OrderPageState extends State<OrderPage> {
           ),
         ),
         SizedBox(
-          height: size.height * 0.10,
+          height: size.height * 0.075,
           child: Container(
             margin: const EdgeInsets.only(left: 10, right: 10),
-            child: Row(
-              children: [
-                ElevatedButtonWidget(title: 'FOR HERE', secondaryColor: true, onPressed: () {}),
-                const SizedBox(width: 5),
-                ElevatedButtonWidget(title: 'Orders', onPressed: () {}),
-                const SizedBox(width: 5),
-                ElevatedButtonWidget(title: 'FOR HERE', centerIcon: Icons.print, onPressed: () {}),
-              ],
+            child: LayoutBuilder(
+              builder: (ctx, constrains) => Row(
+                children: [
+                  SizedBox(
+                    width: constrains.maxWidth * 0.375,
+                    height: constrains.maxHeight * 0.75,
+                    child: ElevatedButtonWidget(title: 'FOR HERE', secondaryColor: true, onPressed: () {}),
+                  ),
+                  const Spacer(),
+                  SizedBox(
+                    width: constrains.maxWidth * 0.375,
+                    height: constrains.maxHeight * 0.75,
+                    child: ElevatedButtonWidget(title: 'Orders', onPressed: () {}),
+                  ),
+                  const Spacer(),
+                  SizedBox(
+                    width: constrains.maxWidth * 0.20,
+                    height: constrains.maxHeight * 0.75,
+                    child: ElevatedButtonWidget(title: 'FOR HERE', centerIcon: Icons.print, onPressed: () {}),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
         SizedBox(
-          height: size.height * 0.50,
+          height: size.height * 0.475,
           child: Container(
             margin: const EdgeInsets.only(left: 10, right: 10),
             color: Theme.of(context).colorScheme.tertiary,
@@ -74,21 +88,28 @@ class _OrderPageState extends State<OrderPage> {
           ),
         ),
         SizedBox(
-          height: size.height * 0.15,
+          height: size.height * 0.20,
           child: Container(
             color: Theme.of(context).colorScheme.tertiary,
-            margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
             padding: const EdgeInsets.all(10),
-            child: Column(
-              children: const [
-                CashWidget(title: 'Subtotal', value: 7.10),
-                CashWidget(title: 'Tax', value: 7.10),
-                CashWidget(
-                  title: 'Total',
-                  value: 7.10,
-                  isBig: true,
-                ),
-              ],
+            margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+            child: LayoutBuilder(
+              builder: (ctx, constraints) => Column(
+                children: [
+                  SizedBox(
+                    height: constraints.maxHeight * 0.25,
+                    child: const CashWidget(title: 'Subtotal', value: 7.10),
+                  ),
+                  SizedBox(
+                    height: constraints.maxHeight * 0.25,
+                    child: const CashWidget(title: 'Tax', value: 7.10),
+                  ),
+                  SizedBox(
+                    height: constraints.maxHeight * 0.5,
+                    child: const CashWidget(title: 'Total', value: 7.10, isBig: true),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

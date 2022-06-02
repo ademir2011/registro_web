@@ -24,26 +24,18 @@ class ElevatedButtonWidget extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         primary: secondaryColor ? const Color(0xfff99b24) : null,
       ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: big ? 40 : 15, vertical: big ? 25 : 15),
-        child: centerIcon != null
-            ? Icon(centerIcon, size: 29)
-            : prefixIcon != null
-                ? Row(
-                    children: [
-                      Icon(prefixIcon, size: 29),
-                      const SizedBox(width: 5),
-                      Text(
-                        title,
-                        style: TextStyle(fontSize: 25),
-                      ),
-                    ],
-                  )
-                : Text(
-                    title,
-                    style: TextStyle(fontSize: 25),
-                  ),
-      ),
+      child: centerIcon != null
+          ? FittedBox(child: Icon(centerIcon))
+          : prefixIcon != null
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FittedBox(child: Icon(prefixIcon)),
+                    const SizedBox(width: 5),
+                    FittedBox(child: Text(title)),
+                  ],
+                )
+              : FittedBox(child: Text(title)),
       onPressed: onPressed,
     );
   }

@@ -14,22 +14,21 @@ class CashWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(fontSize: 20),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: isBig ? CrossAxisAlignment.end : CrossAxisAlignment.center,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontSize: 20),
+        ),
+        Text(
+          '\$${value.toStringAsFixed(2)}',
+          style: TextStyle(
+            fontSize: isBig ? 40 : 20,
           ),
-          Text(
-            '\$${value.toStringAsFixed(2)}',
-            style: TextStyle(
-              fontSize: isBig ? 40 : 20,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
